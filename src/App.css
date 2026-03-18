@@ -1,48 +1,76 @@
 /* App.css */
-.container {
-  background-color: #121212;
-  color: white;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
+
+:root {
+  --primary: #00d1ff;
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #ffffff;
+}
+
+body {
   margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Itens um embaixo do outro */
+  align-items: center;    /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .titulo {
-  color: #00d1ff;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* AQUI ESTÁ O PULO DO GATO: FLEXBOX NOS BOTOES */
+.botoes-area {
+  display: flex;
+  gap: 20px;           /* Espaço exato entre os botões */
+  flex-wrap: wrap;     /* Se não couber na tela do celular, ele pula linha sozinho */
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .botao-jogar {
-  margin: 10px;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 8px;
-  border: 2px solid #00d1ff;
-  background-color: transparent;
-  color: #00ff55;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Botões redondos parecem mais "app" */
+  border: 3px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
   font-weight: bold;
-  transition: 0.3s;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .botao-jogar:hover {
-  background-color: #00d1ff;
-  color: #121212;
+  transform: scale(1.1);
+  background-color: var(--primary);
+  color: var(--bg);
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.5);
 }
 
 .resultado-card {
-  background-color: #1e1e1e;
-  padding: 30px;
-  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--card);
+  padding: 20px 50px;
+  border-radius: 20px;
   border: 1px solid #333;
-  text-align: center;
+  animation: fadeIn 0.5s ease; /* Efeito de aparecer suave */
 }
 
-.placar-area {
-  margin-top: 40px;
-  text-align: center;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
