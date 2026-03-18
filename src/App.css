@@ -1,76 +1,103 @@
-/* App.css */
-
-:root {
+ :root {
   --primary: #00d1ff;
   --bg: #121212;
-  --card: #1e1e1e;
-  --text: #ffffff;
+   --card: #1e1e1e;
 }
 
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
+  padding: 0;
 }
 
 .container {
   display: flex;
-  flex-direction: column; /* Itens um embaixo do outro */
-  align-items: center;    /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  background-color: var(--bg);
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
 }
 
-.titulo {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.placar-topo {
+  display: flex;
+  gap: 30px;
+  font-size: 1.5rem;
+  background: var(--card);
+  padding: 10px 40px;
+  border-radius: 50px;
+  border: 2px solid var(--primary);
+  margin-bottom: 20px;
 }
 
-/* AQUI ESTÁ O PULO DO GATO: FLEXBOX NOS BOTOES */
+.status-msg {
+  height: 50px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
 .botoes-area {
   display: flex;
-  gap: 20px;           /* Espaço exato entre os botões */
-  flex-wrap: wrap;     /* Se não couber na tela do celular, ele pula linha sozinho */
-  justify-content: center;
-  margin-bottom: 50px;
+  gap: 20px;
+   justify-content: center;
 }
 
 .botao-jogar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%; /* Botões redondos parecem mais "app" */
-  border: 3px solid var(--primary);
-  background: transparent;
-  color: var(--primary);
-  font-weight: bold;
+  font-size: 3.5rem;
+  background: none;
+  border: 3px solid transparent;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.2s, border-color 0.2s;
+  padding: 15px;
+  border-radius: 20px;
 }
 
-.botao-jogar:hover {
+.botao-jogar:hover:not(:disabled) {
   transform: scale(1.1);
-  background-color: var(--primary);
-  color: var(--bg);
-  box-shadow: 0 0 20px rgba(0, 209, 255, 0.5);
+  border-color: var(--primary);
 }
 
-.resultado-card {
+.botao-jogar:disabled {
+  opacity: 0.3;
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
+.arena {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 40px;
+  animation: aparece 0.4s ease-out;
+}
+
+.escolha-display {
+  font-size: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--card);
-  padding: 20px 50px;
-  border-radius: 20px;
-  border: 1px solid #333;
-  animation: fadeIn 0.5s ease; /* Efeito de aparecer suave */
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.escolha-display p {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-top: 10px;
+}
+
+.vs-badge {
+  background: var(--primary);
+  color: rgb(18, 231, 203);
+  padding: 5px 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+@keyframes aparece {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
