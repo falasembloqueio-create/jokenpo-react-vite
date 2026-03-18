@@ -1,7 +1,25 @@
- :root {
-  --primary: #00d1ff;
-  --bg: #121212;
-   --card: #1e1e1e;
+:root {
+  --primary: #00d1ff; /* Azul Neon vibrante */
+  --bg: #0d0d0d;      /* Preto profundo */
+  --card: #1a1a1a;    /* Cinza escuro para o placar não ser vermelho sangue */
+  --vitoria: #000000; /* Verde para quando ganhar */
+}
+
+.titulo {
+  color: var(--primary);
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(0, 209, 255, 0.4); /* Brilho neon */
+  margin-bottom: 10px;
+}
+
+.status-msg {
+  height: 60px;
+  margin-bottom: 20px;
+  font-size: 2rem;      /* Aumentei o tamanho */
+  font-weight: 800;
+  color: #ffffff;      /* Branco puro para destacar */
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
 }
 
 * {
@@ -90,7 +108,7 @@
 
 .vs-badge {
   background: var(--primary);
-  color: rgb(18, 231, 203);
+  color: rgb(17, 17, 17);
   padding: 5px 15px;
   font-weight: bold;
   border-radius: 5px;
@@ -100,4 +118,21 @@
 @keyframes aparece {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
+}
+
+.btn-reset {
+  margin-top: 40px;
+  background: transparent;
+  color: #ff5252;
+  border: 1px solid #ff5252;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-reset:hover {
+  background: #ff5252;
+  color: white;
 }

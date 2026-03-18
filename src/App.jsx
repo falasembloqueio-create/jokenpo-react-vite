@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 1. Importamos o useEffect
 import "./App.css";
+import Placar from "./components/Placar";
+import Arena from "./components/Arena";
 
 export default function App() {
   const [player, setPlayer] = useState(null);
   const [computer, setComputer] = useState(null);
   const [resultado, setResultado] = useState("Escolha sua arma!");
-  const [jogando, setJogando] = useState(false); // Estado para o suspense
-  const [placar, setPlacar] = useState({ player: 0, computer: 0 });
+  const [jogando, setJogando] = useState(false);
+  
+  // 2. Iniciamos o placar tentando ler o que está salvo no navegador
+  const [placar, setPlacar] = useState(() => {
+    const salvo = localStorage.getItem("placar-jokenpo");
+    return salvo ? JSON.parse(salvo) : { player: 0, computer: 0 };
+  });
+
+  // 3. useEffect para SALVAR o placar toda vez que ele mudar
+  useEffect(() => {
+    localStorage.setItem("placar-jokenpo", JSON.stringify(placar));
+  }, [placar]);
 
   const opcoes = [
     { nome: "Pedra", emoji: "✊" },
@@ -15,25 +27,18 @@ export default function App() {
   ];
 
   const jogar = (escolhaDoPlayer) => {
-    if (jogando) return; // Impede clicar várias vezes durante o suspense
-
+    if (jogando) return;
     setJogando(true);
     setResultado("O computador está pensando...");
     setPlayer(null);
     setComputer(null);
 
-    // Efeito de suspense: o PC demora 1 segundo para decidir
     setTimeout(() => {
       const escolhaDoPC = opcoes[Math.floor(Math.random() * 3)];
       setPlayer(escolhaDoPlayer);
       setComputer(escolhaDoPC);
 
-      // Lógica de Elite (Mapeamento)
-      const regras = {
-        Pedra: "Tesoura",
-        Papel: "Pedra",
-        Tesoura: "Papel",
-      };
+      const regras = { Pedra: "Tesoura", Papel: "Pedra", Tesoura: "Papel" };
 
       if (escolhaDoPlayer.nome === escolhaDoPC.nome) {
         setResultado("Empate! 🤝");
@@ -48,15 +53,16 @@ export default function App() {
     }, 800);
   };
 
+  // 4. Função para resetar o placar (opcional, mas bom ter)
+  const resetarPlacar = () => {
+    setPlacar({ player: 0, computer: 0 });
+  };
+
   return (
     <div className="container">
       <h1 className="titulo">Jokenpô 90D</h1>
       
-      <div className="placar-topo">
-        <span>VOCÊ: {placar.player}</span>
-        <span>VS</span>
-        <span>PC: {placar.computer}</span>
-      </div>
+      <Placar pontosPlayer={placar.player} pontosComputer={placar.computer} />
 
       <h2 className="status-msg">{resultado}</h2>
 
@@ -73,19 +79,10 @@ export default function App() {
         ))}
       </div>
 
-      {player && computer && (
-        <div className="arena">
-          <div className="escolha-display">
-             <span>{player.emoji}</span>
-             <p>Sua Escolha</p>
-          </div>
-          <div className="vs-badge">VS</div>
-          <div className="escolha-display">
-             <span>{computer.emoji}</span>
-             <p>PC</p>
-          </div>
-        </div>
-    )}
+      <Arena player={player} computer={computer} />
+
+      {/* Botão de Reset */}
+      <button className="btn-reset" onClick={resetarPlacar}>Resetar Placar</button>
     </div>
   );
 }
