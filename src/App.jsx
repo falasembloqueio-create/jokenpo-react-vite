@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"; // 1. Importamos o useEffect
+import { useState, useEffect } from "react";
+import confetti from "canvas-confetti"; 
 import "./App.css";
 import Placar from "./components/Placar";
 import Arena from "./components/Arena";
@@ -9,13 +10,13 @@ export default function App() {
   const [resultado, setResultado] = useState("Escolha sua arma!");
   const [jogando, setJogando] = useState(false);
   
-  // 2. Iniciamos o placar tentando ler o que está salvo no navegador
+  // Inicia o placar lendo do LocalStorage
   const [placar, setPlacar] = useState(() => {
     const salvo = localStorage.getItem("placar-jokenpo");
     return salvo ? JSON.parse(salvo) : { player: 0, computer: 0 };
   });
 
-  // 3. useEffect para SALVAR o placar toda vez que ele mudar
+  // Salva o placar sempre que ele mudar
   useEffect(() => {
     localStorage.setItem("placar-jokenpo", JSON.stringify(placar));
   }, [placar]);
@@ -32,7 +33,7 @@ export default function App() {
     setResultado("O computador está pensando...");
     setPlayer(null);
     setComputer(null);
-
+ 
     setTimeout(() => {
       const escolhaDoPC = opcoes[Math.floor(Math.random() * 3)];
       setPlayer(escolhaDoPlayer);
@@ -45,6 +46,15 @@ export default function App() {
       } else if (regras[escolhaDoPlayer.nome] === escolhaDoPC.nome) {
         setResultado("Você Ganhou! 🎉");
         setPlacar((p) => ({ ...p, player: p.player + 1 }));
+        
+        // DISPARA OS CONFETES NA VITÓRIA
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#00d1ff', '#ffffff', '#00ff88']
+        });
+
       } else {
         setResultado("Você Perdeu! 💀");
         setPlacar((p) => ({ ...p, computer: p.computer + 1 }));
@@ -53,7 +63,6 @@ export default function App() {
     }, 800);
   };
 
-  // 4. Função para resetar o placar (opcional, mas bom ter)
   const resetarPlacar = () => {
     setPlacar({ player: 0, computer: 0 });
   };
@@ -81,7 +90,6 @@ export default function App() {
 
       <Arena player={player} computer={computer} />
 
-      {/* Botão de Reset */}
       <button className="btn-reset" onClick={resetarPlacar}>Resetar Placar</button>
     </div>
   );
