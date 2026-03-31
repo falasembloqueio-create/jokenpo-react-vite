@@ -1,16 +1,28 @@
-# React + Vite
+# Jokenpô Pro 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> O clássico Pedra, Papel e Tesoura recriado com uma interface moderna e lógica de jogo em tempo real.
 
-Currently, two official plugins are available:
+Este projeto demonstra o domínio de **Lógica de Programação** e manipulação de estados no React. Desenvolvido durante meu intensivo de 18 dias, o foco aqui foi criar uma experiência de usuário (UX) rápida e responsiva, garantindo que o fluxo do jogo seja intuitivo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🔗 Links
+- **Deploy:** [https://falasembloqueio-create.github.io/jokenpo-react-vite/](https://falasembloqueio-create.github.io/jokenpo-react-vite/)
+- **Repositório:** [https://github.com/falasembloqueio-create/jokenpo-react-vite](https://github.com/falasembloqueio-create/jokenpo-react-vite)
 
-## React Compiler
+## 🛠️ Tecnologias e Ferramentas
+- **React + Vite**: Setup otimizado para desenvolvimento web moderno.
+- **TypeScript**: Garantia de tipos para evitar erros de lógica durante o jogo.
+- **Tailwind CSS**: Estilização baseada em utilitários para um design responsivo.
+- **Framer Motion / CSS Transitions**: (Se você usou animações) Para suavizar as transições de escolha.
+- **Lucide React**: Ícones para representação visual das jogadas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Funcionalidades Principais
+- **Modo Humano vs CPU**: Inteligência artificial simples baseada em geração de números aleatórios.
+- **Placar Dinâmico**: Sistema que contabiliza vitórias, empates e derrotas sem recarregar a página.
+- **Feedback Visual**: Cores e ícones que indicam o resultado de cada rodada instantaneamente.
+- **Mobile Friendly**: Totalmente adaptado para jogar em smartphones ou desktops.
 
-## Expanding the ESLint configuration
+## 🧠 Desafios e Aprendizados
+O principal aprendizado neste projeto foi a estruturação da **Máquina de Estados**. Precisei gerenciar o estado da escolha do jogador, a escolha aleatória do computador e o cálculo do vencedor simultaneamente. Trabalhar com `Math.random()` integrado ao ciclo de vida do React me permitiu criar uma lógica de jogo justa e livre de bugs de sincronia.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+Desenvolvido por [Davi] - [Conecte-se comigo no LinkedIn](www.linkedin.com/in/davi-gomes-azevedo-b326b139b)
